@@ -1,0 +1,86 @@
+@import url("./fontello.css");
+
+
+:root {
+    --white-gray: #fff1ee;
+    --bg-gray: #efccc4;
+    --color-gray: #9c3131;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    background: var(--white-gray);
+}
+
+.cards {
+    display: grid;
+    grid-template-rows: 100px auto 100px;
+    @media (min-width: 576px) {
+        grid-template-rows: auto;
+        grid-template-columns: 100px auto 100px;
+    }
+    height: 100vh;
+    max-height: 400px;
+
+    // palette
+    background: var(--bg-gray);
+    color: var(--color-gray);
+    border-color: var(--color-gray);
+    .cards__arow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &:first-child {
+            border-bottom: 1px solid;
+        }
+        &:last-child {
+            border-top: 1px solid;
+        }
+        @media (min-width: 576px) {
+            &:first-child {
+                border: 0;
+                border-right: 1px solid;
+            }
+            &:last-child {
+                border: 0;
+                border-left: 1px solid;
+            }
+        }
+    }
+}
+
+.content {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 16px;
+    gap: 8px;
+    height: 100%;
+
+    font-size: 22px;
+
+    .content__ru {
+
+    }
+    .content__en {
+
+    }
+    .content__ph {
+        color: #4e4e4e;
+    }
+    .hide {
+        opacity: 0;
+    }
+}
