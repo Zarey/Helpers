@@ -4,12 +4,14 @@
     <title>Тренажер</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?ver=0.1">
   </head>
   <body>
 
     <div class="cards">
-      <div class="cards__arow icon-left-open" id="prev"></div>
+      <div class="cards__arow icon-left-open" id="prev">
+        <div class="cards__count" id="spent"></div>
+      </div>
       <div class="cards__card">
         <div class="content" id="content">
           <div class="content__ru"></div>
@@ -17,10 +19,12 @@
           <div class="content__ph"></div>
         </div>
       </div>
-      <div class="cards__arow icon-right-open" id="next"></div>
+      <div class="cards__arow icon-right-open" id="next">
+        <div class="cards__count" id="remain"></div>
+      </div>
     </div>
 
-    <script src="./js/index.js"></script>
+    <script src="./js/index.js?ver=0.1"></script>
 
   </body>
 </html>

@@ -16,6 +16,7 @@ let words = [
 	},
 ];
 
+
 let position = 0;
 
 let cards = {
@@ -24,15 +25,19 @@ let cards = {
             ru: document.getElementsByClassName('content__ru')[0],
             en: document.getElementsByClassName('content__en')[0],
             ph: document.getElementsByClassName('content__ph')[0],
+            remain: document.getElementById('remain'),
+            spent: document.getElementById('spent'),
         }
         return cards;
     },
-    setContent: (ru, en, ph) => {
+    setContent: (words, position) => {
     	let fields = cards.getDOM();
 
-    	fields.ru.innerHTML = ru;
-    	fields.en.innerHTML = en;
-    	fields.ph.innerHTML = ph;
+    	fields.ru.innerHTML = words[position].ru;
+    	fields.en.innerHTML = words[position].en;
+    	fields.ph.innerHTML = words[position].ph;
+		fields.spent.innerHTML = position + 1;
+    	fields.remain.innerHTML = words.length - (position + 1);
     },
     stateAsk: () => {
     	let fields = cards.getDOM();
@@ -58,7 +63,7 @@ let cards = {
 }
 
 
-let slide = {
+let setPosition = {
 	current: () => {
 		if (words[position]) {
 			return words[position];
@@ -87,29 +92,6 @@ let slide = {
 	},
 }
 
-// Загрузка страницы
-let word = slide.current();
-cards.setContent(word.ru, word.en, word.ph);
-cards.stateAsk();
-
-// Листаем назад
-document.getElementById('prev').onclick = function() {
-	let word = slide.prev();
-	cards.setContent(word.ru, word.en, word.ph);
-	cards.stateAsk();
-}
-
-// Листаем вперед
-document.getElementById('next').onclick = function() {
-	let word = slide.next();
-	cards.setContent(word.ru, word.en, word.ph);
-	cards.stateAsk();
-}
-
-// Смотрим ответ
-document.getElementById('content').onclick = function() {
-	cards.stateToggle();
-}
 
 function randomise(array) {
 	let newArray = [];
@@ -141,3 +123,49 @@ function rand(min, max) {
 	}
 }
 
+/************************ События ************************/
+
+// Загрузка страницы
+words = randomise(words);
+setPosition.current();
+cards.setContent(words, position);
+cards.stateAsk();
+
+// Листаем назад
+document.getElementById('prev').onclick = function() {
+	setPosition.prev();
+	cards.setContent(words, position);
+	cards.stateAsk();
+}
+
+// Листаем вперед
+document.getElementById('next').onclick = function() {
+	setPosition.next();
+	cards.setContent(words, position);
+	cards.stateAsk();
+}
+
+// Смотрим ответ
+document.getElementById('content').onclick = function() {
+	cards.stateToggle();
+}
+
+document.onkeydown = function(event) {
+	// << Листаем назад
+	if (event.keyCode == 37) {
+		setPosition.prev();
+		cards.setContent(words, position);
+		cards.stateAsk();
+	}
+	// >> Листаем вперед
+	if (event.keyCode == 39) {
+		setPosition.next();
+		cards.setContent(words, position);
+		cards.stateAsk();
+	}
+	
+	// /\ Смотрим ответ
+	if (event.keyCode == 38) {
+		cards.stateToggle();
+	}
+}

@@ -37,6 +37,7 @@ body {
   }
 }
 .cards .cards__arow {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,6 +58,13 @@ body {
     border: 0;
     border-left: 1px solid;
   }
+}
+.cards .cards__count {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 12px;
+  color: #999999;
 }
 
 .content {
